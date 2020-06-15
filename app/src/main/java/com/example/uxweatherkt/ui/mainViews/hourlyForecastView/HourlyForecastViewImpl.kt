@@ -1,11 +1,9 @@
 package com.example.uxweatherkt.ui.mainViews.hourlyForecastView
 
+import android.os.Build
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uxweatherkt.R
@@ -44,6 +42,9 @@ class HourlyForecastViewImpl : BaseView, HourlyForecastView, HourlyForecastAdapt
         recyclerView = baseRootView.findViewById(R.id.view_recycler__recyclerView)
         recyclerView.adapter = hourlyForecastAdapter
         recyclerView.layoutManager = linearLayoutManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            recyclerView.focusable = View.FOCUSABLE_AUTO
+        }
     }
 
     override fun bindData(hourlyForecastRow: List<HourForecastRow>?) {
@@ -68,7 +69,7 @@ class HourlyForecastViewImpl : BaseView, HourlyForecastView, HourlyForecastAdapt
         baseRootView.visibility = View.VISIBLE
     }
 
-    override fun onHourForecastClick(hourForecastRow: HourForecastRow) {
-        listener.onHourlyAdapterItemClick(hourForecastRow)
+    override fun onHourForecastClick(hourlyForecast: ArrayList<HourForecastRow>) {
+        listener.onHourlyAdapterItemClick(hourlyForecast)
     }
 }

@@ -87,7 +87,9 @@ class WeatherModelStubImpl : WeatherModel {
                 13.0,
                 13.0,
                 11.0,
-                13.0
+                13.0,
+                "NORTH",
+                20
             )
             list.add(dayForecast)
         }

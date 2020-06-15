@@ -7,6 +7,6 @@ interface DailyForecastView: WeatherView {
     fun bindData(dailyForecastRow: List<DayForecastRow>?)
 
     interface Listener {
-        fun onDailyAdapterItemClick(dayForecastRow: DayForecastRow)
+        fun onDailyAdapterItemClick(dailyForecastRow: ArrayList<DayForecastRow>)
     }
 }

@@ -1,14 +1,15 @@
-package com.example.uxweatherkt.ui.detailForecastViews
+package com.example.uxweatherkt.ui.detailForecastViews.detailDailyForecastView
 
 import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uxweatherkt.R
 import com.example.uxweatherkt.presenter.row.DayForecastRow
-import com.example.uxweatherkt.ui.WeatherView
 import com.example.uxweatherkt.ui.baseView.BaseView
 
-class DetailForecastViewImpl: BaseView, DetailForecastView {
+class DetailDailyForecastViewImpl: BaseView,
+    DetailDailyForecastView {
 
     constructor(
         baseRootView: View
@@ -17,9 +18,10 @@ class DetailForecastViewImpl: BaseView, DetailForecastView {
         init()
     }
 
-    private lateinit var detailForecastAdapter: DetailForecastAdapter
+    private lateinit var detailDailyForecastAdapter: DetailDailyForecastAdapter
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var pbLoading: ProgressBar
 
     override fun bindData(dailyForecastRow: List<DayForecastRow>?) {
         hideLoading()
@@ -30,23 +32,26 @@ class DetailForecastViewImpl: BaseView, DetailForecastView {
     }
 
     private fun initData(dailyForecastRow: List<DayForecastRow>) {
-        detailForecastAdapter.setDetailDailyForecast(dailyForecastRow)
+        detailDailyForecastAdapter.setDetailDailyForecast(dailyForecastRow)
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        pbLoading.visibility = View.VISIBLE
+        baseRootView.visibility = View.INVISIBLE
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
+        pbLoading.visibility = View.GONE
+        baseRootView.visibility = View.VISIBLE
     }
 
     private fun init() {
-        detailForecastAdapter = DetailForecastAdapter()
+        detailDailyForecastAdapter =
+            DetailDailyForecastAdapter()
         val linearLayoutManager = LinearLayoutManager(baseRootView.context, RecyclerView.VERTICAL, false)
         recyclerView = baseRootView.findViewById(R.id.fragment_detail__rvDetailWeather)
-        recyclerView.adapter = detailForecastAdapter
+        recyclerView.adapter = detailDailyForecastAdapter
         recyclerView.layoutManager = linearLayoutManager
+        pbLoading = baseRootView.findViewById(R.id.fragment_detail__pbLoading)
     }
-
 }

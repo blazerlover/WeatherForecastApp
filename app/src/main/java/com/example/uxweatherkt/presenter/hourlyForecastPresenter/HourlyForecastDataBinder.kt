@@ -20,6 +20,7 @@ class HourlyForecastDataBinder(private val iconWeatherBinder: IconWeatherBinder)
             val pressure: String = hourlyForecast[i].pressure.toString()
             val humidity: String = hourlyForecast[i].humidity.toInt().toString() + percent
             val windSpeed: String = hourlyForecast[i].windSpeed.toString()
+            val weatherDescription = hourlyForecast[i].weather.description
             val iconId: Int =
                 iconWeatherBinder.bindIconId(hourlyForecast[i].weather.code, hourlyForecast[i].pod)
             hourlyForecastView.add(
@@ -30,6 +31,7 @@ class HourlyForecastDataBinder(private val iconWeatherBinder: IconWeatherBinder)
                     pressure,
                     humidity,
                     windSpeed,
+                    weatherDescription,
                     iconId
                 )
             )

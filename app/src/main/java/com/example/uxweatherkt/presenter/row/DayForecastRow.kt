@@ -51,7 +51,7 @@ class DayForecastRow : Parcelable {
     }
 
     private constructor (parcel: Parcel) {
-        val array = arrayOfNulls<String>(11)
+        val array = arrayOfNulls<String>(12)
         parcel.readStringArray(array)
         date = array[0]
         dayOfWeek = array[1]
@@ -79,7 +79,10 @@ class DayForecastRow : Parcelable {
                 minTempFeelLike,
                 pressure,
                 humidity,
-                windSpeed
+                windSpeed,
+                windDir,
+                pop,
+                weatherDescription
             )
         )
         dest?.writeInt(iconId)
