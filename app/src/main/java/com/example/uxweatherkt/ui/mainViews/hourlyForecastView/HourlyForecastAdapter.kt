@@ -13,10 +13,10 @@ import com.example.uxweatherkt.presenter.row.HourForecastRow
 class HourlyForecastAdapter(var listener: Listener) : RecyclerView.Adapter<HourlyForecastAdapter.ViewHolder>() {
 
     interface Listener {
-        fun onHourForecastClick(hourForecastRow: HourForecastRow)
+        fun onHourForecastClick(hourlyForecast: ArrayList<HourForecastRow>)
     }
 
-    var hourlyForecast = ArrayList<HourForecastRow>()
+    var hourlyForecastRow = ArrayList<HourForecastRow>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,37 +25,31 @@ class HourlyForecastAdapter(var listener: Listener) : RecyclerView.Adapter<Hourl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val hourForecastRow = hourlyForecast[position]
+        val hourForecastRow = hourlyForecastRow[position]
         holder.tvDate.text = hourForecastRow.date
         holder.tvHumidity.text = hourForecastRow.humidity
         holder.tvTemp.text = hourForecastRow.temp
         holder.tvFeelLike.text = hourForecastRow.feelLike
         holder.ivWeather.setImageResource(hourForecastRow.iconId)
+        holder.itemView.setOnClickListener { listener.onHourForecastClick(hourlyForecastRow) }
     }
 
     override fun getItemCount(): Int {
-        return hourlyForecast.size
+        return hourlyForecastRow.size
     }
 
     fun setDailyForecast(dailyForecastRow: ArrayList<HourForecastRow>) {
-        this.hourlyForecast.clear()
-        this.hourlyForecast.addAll(dailyForecastRow)
+        this.hourlyForecastRow.clear()
+        this.hourlyForecastRow.addAll(dailyForecastRow)
         notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: CardView) : RecyclerView.ViewHolder(itemView) {
-        val tvDate: TextView
-        val tvHumidity: TextView
-        val tvTemp: TextView
-        val tvFeelLike: TextView
-        val ivWeather: ImageView
+        val tvDate: TextView = itemView.findViewById(R.id.row_hour_forecast__tvDate)
+        val tvHumidity: TextView = itemView.findViewById(R.id.row_hour_forecast__tvHumidity)
+        val tvTemp: TextView = itemView.findViewById(R.id.row_hour_forecast__tvTemp)
+        val tvFeelLike: TextView = itemView.findViewById(R.id.row_hour_forecast__tvFeelLike)
+        val ivWeather: ImageView = itemView.findViewById(R.id.row_hour_forecast__ivWeather)
 
-        init {
-            tvDate = itemView.findViewById(R.id.row_hour_forecast__tvDate)
-            tvHumidity = itemView.findViewById(R.id.row_hour_forecast__tvHumidity)
-            tvTemp = itemView.findViewById(R.id.row_hour_forecast__tvTemp)
-            tvFeelLike = itemView.findViewById(R.id.row_hour_forecast__tvFeelLike)
-            ivWeather = itemView.findViewById(R.id.row_hour_forecast__ivWeather)
-        }
     }
 }

@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.uxweatherkt.App
 
 import com.example.uxweatherkt.R
@@ -28,10 +26,8 @@ import com.example.uxweatherkt.presenter.row.DayForecastRow
 import com.example.uxweatherkt.presenter.row.HourForecastRow
 import com.example.uxweatherkt.ui.mainViews.currentWeatherView.CurrentWeatherView
 import com.example.uxweatherkt.ui.mainViews.currentWeatherView.CurrentWeatherViewImpl
-import com.example.uxweatherkt.ui.mainViews.dailyForecastView.DailyForecastAdapter
 import com.example.uxweatherkt.ui.mainViews.dailyForecastView.DailyForecastView
 import com.example.uxweatherkt.ui.mainViews.dailyForecastView.DailyForecastViewImpl
-import com.example.uxweatherkt.ui.mainViews.hourlyForecastView.HourlyForecastAdapter
 import com.example.uxweatherkt.ui.mainViews.hourlyForecastView.HourlyForecastView
 import com.example.uxweatherkt.ui.mainViews.hourlyForecastView.HourlyForecastViewImpl
 
@@ -158,11 +154,11 @@ class MainFragment : Fragment(), HourlyForecastView.Listener, DailyForecastView.
             Observer { dailyForecastRow -> dailyForecastView.bindData(dailyForecastRow) })
     }
 
-    override fun onHourlyAdapterItemClick(hourForecastRow: HourForecastRow) {
-        TODO("Not yet implemented")
+    override fun onHourlyAdapterItemClick(hourlyForecastRow: ArrayList<HourForecastRow>) {
+        DetailDayActivity.StartObj.startWithHourlyForecast(context ?: return, hourlyForecastRow)
     }
 
-    override fun onDailyAdapterItemClick(dayForecastRow: DayForecastRow) {
-        DetailDayActivity.StartObj.start(context ?: return, dayForecastRow)
+    override fun onDailyAdapterItemClick(dailyForecastRow: ArrayList<DayForecastRow>) {
+        DetailDayActivity.StartObj.startWithDailyForecast(context ?: return, dailyForecastRow)
     }
 }

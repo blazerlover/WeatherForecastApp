@@ -9,7 +9,9 @@ class DayForecast(
     val minTempFeelLike: Double,
     val pressure: Double,
     val humidity: Double,
-    val windSpeed: Double
+    val windSpeed: Double,
+    val windDir: String,
+    val pop: Int
 ) {
     override fun toString(): String {
         return "DayForecast(weather=$weather, date=$date, maxTemp=$maxTemp, minTemp=$minTemp, maxTempFeelLike=$maxTempFeelLike, minTempFeelLike=$minTempFeelLike, pressure=$pressure, humidity=$humidity, windSpeed=$windSpeed)"

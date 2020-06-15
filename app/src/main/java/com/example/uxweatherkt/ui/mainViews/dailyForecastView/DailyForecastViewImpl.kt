@@ -1,11 +1,9 @@
 package com.example.uxweatherkt.ui.mainViews.dailyForecastView
 
+import android.os.Build
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uxweatherkt.R
@@ -66,9 +64,12 @@ class DailyForecastViewImpl : BaseView, DailyForecastView, DailyForecastAdapter.
         recyclerView = baseRootView.findViewById(R.id.view_recycler__recyclerView)
         recyclerView.adapter = dailyForecastAdapter
         recyclerView.layoutManager = linearLayoutManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            recyclerView.focusable = View.FOCUSABLE_AUTO
+        }
     }
 
-    override fun onDayForecastClick(dayForecastRow: DayForecastRow) {
-        listener.onDailyAdapterItemClick(dayForecastRow)
+    override fun onDayForecastClick(dailyForecastRows: ArrayList<DayForecastRow>) {
+        listener.onDailyAdapterItemClick(dailyForecastRows)
     }
 }

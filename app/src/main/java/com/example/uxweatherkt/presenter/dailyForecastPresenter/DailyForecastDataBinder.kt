@@ -1,6 +1,7 @@
 package com.example.uxweatherkt.presenter.dailyForecastPresenter
 
 import com.example.uxweatherkt.DEGREE_UNIT
+import com.example.uxweatherkt.PERCENT_UNIT
 import com.example.uxweatherkt.presenter.row.DayForecastRow
 import com.example.uxweatherkt.presenter.util.IconWeatherBinder
 import com.example.uxweatherkt.weather.model.DayForecast
@@ -21,13 +22,14 @@ class DailyForecastDataBinder(private val iconWeatherBinder: IconWeatherBinder) 
             val minTempFeelLike = dailyForecast[i].minTempFeelLike.toString() + DEGREE_UNIT
             val pressure: String = dailyForecast[i].pressure.toString()
             val humidity: String = dailyForecast[i].humidity.toString()
-            val windSpeed: String = dailyForecast[i].windSpeed.toString()
-//            TODO
-            val windDir: String = "North"
-//            TODO
-            val weatherDescription = "Nice"
-//            TODO
-            val pop = "POP"
+            val windSpeed: String = (dailyForecast[i].windSpeed.toInt()).toString()
+            val windDir: String = dailyForecast[i].windDir
+            val weatherDescription = dailyForecast[i].weather.description
+            val pop: String = if (dailyForecast[i].pop == 0) {
+                ""
+            } else {
+                dailyForecast[i].pop.toString() + PERCENT_UNIT
+            }
             val iconId: Int = iconWeatherBinder.bindIconId(dailyForecast[i].weather.code, "d")
             dailyForecastView.add(
                 DayForecastRow(

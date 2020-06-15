@@ -7,6 +7,6 @@ interface HourlyForecastView: WeatherView {
     fun bindData(hourlyForecastRow: List<HourForecastRow>?)
 
     interface Listener {
-        fun onHourlyAdapterItemClick(hourForecastRow: HourForecastRow)
+        fun onHourlyAdapterItemClick(hourlyForecastRow: ArrayList<HourForecastRow>)
     }
 }

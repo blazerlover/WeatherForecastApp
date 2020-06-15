@@ -13,7 +13,7 @@ class DailyForecastAdapter(var listener: Listener) :
     RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
 
     interface Listener {
-        fun onDayForecastClick(dayForecastRow: DayForecastRow)
+        fun onDayForecastClick(dailyForecastRows: ArrayList<DayForecastRow>)
     }
 
     private var dailyForecastRows = ArrayList<DayForecastRow>()
@@ -38,7 +38,7 @@ class DailyForecastAdapter(var listener: Listener) :
         holder.ivWeather.setImageResource(dayForecastRow.iconId)
         holder.tvDate.text = dayForecastRow.date
         holder.tvDayOfWeek.text = dayForecastRow.dayOfWeek
-        holder.itemView.setOnClickListener { listener.onDayForecastClick(dayForecastRow) }
+        holder.itemView.setOnClickListener { listener.onDayForecastClick(dailyForecastRows) }
     }
 
     override fun getItemCount(): Int {
