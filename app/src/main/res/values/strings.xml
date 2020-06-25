@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UxWeatherKt</string>
+    <string name="app_name">WeatherForecastApp</string>
 
     <string name="submit">Submit</string>
     <string name="deny">Deny</string>
